@@ -1,24 +1,24 @@
 #include<iostream>
 #include "TQueue.h"
-
-/*int main()
+using namespace std;
+int main()
 {
 	TQueue<int> q(4);
-	int i = 1;
-	while (!(q.full()))
-	{
-		q.Push(i);
-		i++;
-	}
 	
-	q.output();
+		q.Push(1);
+		q.Push(2);
+		q.Push(3);
+		q.Push(4);
+	
 
 	TQueue<int> q1(q);
 	q1.output();
+	cout << q1.front();
+	cout << " " << q1.back();
 	
-}*/
+}
 //#include "../Queue/TQueue.h"
-#include <iostream>
+/*#include <iostream>
 
 #include <random>
 using namespace std;
@@ -60,4 +60,4 @@ int main() {
 	cout << "Очередь была полной " << fullQueueCount << " раз" << std::endl;
 
 	//return 0;
-}
+}*/

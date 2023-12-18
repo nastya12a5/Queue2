@@ -129,7 +129,7 @@ namespace circlebuffer {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(51, 38);
+			this->label1->Location = System::Drawing::Point(32, 36);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(164, 13);
@@ -140,7 +140,7 @@ namespace circlebuffer {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(76, 64);
+			this->label2->Location = System::Drawing::Point(32, 62);
 			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(136, 13);
@@ -150,7 +150,7 @@ namespace circlebuffer {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(70, 94);
+			this->label3->Location = System::Drawing::Point(32, 92);
 			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(143, 13);
@@ -160,7 +160,7 @@ namespace circlebuffer {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(75, 121);
+			this->label4->Location = System::Drawing::Point(32, 121);
 			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(139, 13);
@@ -171,7 +171,7 @@ namespace circlebuffer {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(93, 151);
+			this->label5->Location = System::Drawing::Point(32, 151);
 			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(120, 13);
@@ -182,7 +182,7 @@ namespace circlebuffer {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(86, 182);
+			this->label6->Location = System::Drawing::Point(32, 182);
 			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(124, 13);
@@ -205,7 +205,7 @@ namespace circlebuffer {
 			this->label8->AutoSize = true;
 			this->label8->BackColor = System::Drawing::Color::Aquamarine;
 			this->label8->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label8->Location = System::Drawing::Point(222, 151);
+			this->label8->Location = System::Drawing::Point(225, 151);
 			this->label8->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(55, 13);
@@ -216,7 +216,7 @@ namespace circlebuffer {
 			// 
 			this->label9->AutoSize = true;
 			this->label9->BackColor = System::Drawing::Color::Aquamarine;
-			this->label9->Location = System::Drawing::Point(222, 182);
+			this->label9->Location = System::Drawing::Point(225, 182);
 			this->label9->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(55, 13);
@@ -228,7 +228,7 @@ namespace circlebuffer {
 			// 
 			this->label10->AutoSize = true;
 			this->label10->BackColor = System::Drawing::Color::Aquamarine;
-			this->label10->Location = System::Drawing::Point(222, 211);
+			this->label10->Location = System::Drawing::Point(225, 211);
 			this->label10->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(55, 13);
@@ -239,7 +239,7 @@ namespace circlebuffer {
 			// 
 			this->textBox1->BackColor = System::Drawing::Color::Aquamarine;
 			this->textBox1->Location = System::Drawing::Point(224, 36);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(56, 20);
 			this->textBox1->TabIndex = 10;
@@ -249,7 +249,7 @@ namespace circlebuffer {
 			// 
 			this->textBox2->BackColor = System::Drawing::Color::Aquamarine;
 			this->textBox2->Location = System::Drawing::Point(224, 62);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(56, 20);
 			this->textBox2->TabIndex = 11;
@@ -259,7 +259,7 @@ namespace circlebuffer {
 			// 
 			this->textBox3->BackColor = System::Drawing::Color::Aquamarine;
 			this->textBox3->Location = System::Drawing::Point(224, 92);
-			this->textBox3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox3->Margin = System::Windows::Forms::Padding(2);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(56, 20);
 			this->textBox3->TabIndex = 12;
@@ -267,8 +267,9 @@ namespace circlebuffer {
 			// textBox4
 			// 
 			this->textBox4->BackColor = System::Drawing::Color::Aquamarine;
+			this->textBox4->ForeColor = System::Drawing::Color::Yellow;
 			this->textBox4->Location = System::Drawing::Point(224, 121);
-			this->textBox4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox4->Margin = System::Windows::Forms::Padding(2);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(56, 20);
 			this->textBox4->TabIndex = 13;
@@ -276,8 +277,8 @@ namespace circlebuffer {
 			// button1
 			// 
 			this->button1->BackColor = System::Drawing::Color::Yellow;
-			this->button1->Location = System::Drawing::Point(53, 243);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button1->Location = System::Drawing::Point(309, 243);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(73, 41);
 			this->button1->TabIndex = 15;
@@ -288,8 +289,8 @@ namespace circlebuffer {
 			// button2
 			// 
 			this->button2->BackColor = System::Drawing::Color::Yellow;
-			this->button2->Location = System::Drawing::Point(142, 243);
-			this->button2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button2->Location = System::Drawing::Point(386, 243);
+			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(64, 41);
 			this->button2->TabIndex = 16;
@@ -300,12 +301,12 @@ namespace circlebuffer {
 			// button3
 			// 
 			this->button3->BackColor = System::Drawing::Color::Yellow;
-			this->button3->Location = System::Drawing::Point(224, 243);
-			this->button3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button3->Location = System::Drawing::Point(454, 243);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(81, 41);
 			this->button3->TabIndex = 17;
-			this->button3->Text = L"Завершить";
+			this->button3->Text = L"Финиш";
 			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
 			// 
@@ -326,7 +327,7 @@ namespace circlebuffer {
 			// 
 			this->label11->AutoSize = true;
 			this->label11->BackColor = System::Drawing::Color::AliceBlue;
-			this->label11->Location = System::Drawing::Point(55, 7);
+			this->label11->Location = System::Drawing::Point(169, 9);
 			this->label11->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label11->Name = L"label11";
 			this->label11->Size = System::Drawing::Size(213, 13);
@@ -358,7 +359,7 @@ namespace circlebuffer {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			this->ResumeLayout(false);

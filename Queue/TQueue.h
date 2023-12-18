@@ -12,35 +12,35 @@ private:
 
 public:
 	TQueue();
-	TQueue(int _size);                       //Конструктор по умолчанию
-	~TQueue();                               //Деструктор
-	TQueue(const TQueue& object);            //Конструктор копирования
-	bool empty();                            //Проверка на пустоту
-	bool full();                             //Проверка на полноту
+	TQueue(int _size);                       
+	~TQueue();                              
+	TQueue(const TQueue& object);            
+	bool empty();                            
+	bool full();                             
 
-	void Push(const T& element);             //Вставка в конец очереди
-	T Pop();                                 //Возвращаем из начала очереди
-	T front();                               //Возращает значение, которое лежит в начале очереди
-	T back();                                //Возращает значение, которое лежит в начале очереди
+	void Push(const T& element);             
+	T Pop();                                 
+	T front();                               
+	T back();                                
 
-	void operator = (const TQueue& object);  //Оператор присваивания
-	bool operator ==(const TQueue& object);  //Оператор сравненияя
-	bool operator !=(const TQueue& object);  //Оператор сравнения
+	void operator = (const TQueue& object);  
+	bool operator ==(const TQueue& object);  
+	bool operator !=(const TQueue& object);  
+	int GetHeadIndex();                      
+	int GetCurrentSize();                    
+	int GetMaxSize();                        
+	int NumberOfElements();                  
 
-	int GetHeadIndex();                      //Получить индекс, на котором стоит первый элемент в очереди
-	int GetCurrentSize();                    //Получить текущий размер
-	int GetMaxSize();                        //Получить размер хранилища
-	int NumberOfElements();                  //Количество элементов в очереди
-
-	void output();                           //Вывод
+	void output();                           
 };
 
 template <class T>
-inline TQueue<T>::TQueue():size(10)
+TQueue<T>::TQueue():size(10)
 {
+
 }
 template<class T>
-inline TQueue<T>::TQueue(int _size)
+ TQueue<T>::TQueue(int _size)
 {
 	if (_size < 1)
 	{
@@ -54,7 +54,7 @@ inline TQueue<T>::TQueue(int _size)
 }
 
 template<class T>
-inline TQueue<T>::~TQueue()
+ TQueue<T>::~TQueue()
 {
 	delete[] pMem;
 	start = 0;
@@ -63,7 +63,7 @@ inline TQueue<T>::~TQueue()
 }
 
 template<class T>
-inline TQueue<T>::TQueue(const TQueue& object)
+ TQueue<T>::TQueue(const TQueue& object)
 {
 	delete[] pMem;
 	size = object.size;
@@ -75,7 +75,7 @@ inline TQueue<T>::TQueue(const TQueue& object)
 }
 
 template<class T>
-inline bool TQueue<T>::empty()
+bool TQueue<T>::empty()
 {
 	if (count == 0)
 	{
@@ -88,7 +88,7 @@ inline bool TQueue<T>::empty()
 }
 
 template<class T>
-inline bool TQueue<T>::full()
+ bool TQueue<T>::full()
 {
 	if (count == size)
 	{
@@ -114,7 +114,7 @@ template<class T>
 }
 
 template<class T>
-inline T TQueue<T>::Pop()
+ T TQueue<T>::Pop()
 {
 	if (empty())
 	{
@@ -128,7 +128,7 @@ inline T TQueue<T>::Pop()
 }
 
 template<class T>
-inline T TQueue<T>::front()
+ T TQueue<T>::front()
 {
 	if (this->empty())
 	{
@@ -138,7 +138,7 @@ inline T TQueue<T>::front()
 }
 
 template<class T>
-inline T TQueue<T>::back()
+ T TQueue<T>::back()
 {
 	if (this->empty())
 	{
@@ -191,37 +191,37 @@ bool TQueue<T>::operator==(const TQueue& object)
 }
 
 template<class T>
-inline bool TQueue<T>::operator!=(const TQueue& object)
+ bool TQueue<T>::operator!=(const TQueue& object)
 {
 	return !(*this == object);
 }
 
 template<class T>
-inline int TQueue<T>::GetHeadIndex()
+ int TQueue<T>::GetHeadIndex()
 {
 	return start;
 }
 
 template<class T>
-inline int TQueue<T>::GetCurrentSize()
+ int TQueue<T>::GetCurrentSize()
 {
 	return (finish - start) + 1;
 }
 
 template<class T>
-inline int TQueue<T>::GetMaxSize()
+ int TQueue<T>::GetMaxSize()
 {
 	return size;
 }
 
 template<class T>
-inline int TQueue<T>::NumberOfElements()
+ int TQueue<T>::NumberOfElements()
 {
 	return count;;
 }
 
 template<class T>
-inline void TQueue<T>::output()
+ void TQueue<T>::output()
 {
 	if (this->empty())
 	{
