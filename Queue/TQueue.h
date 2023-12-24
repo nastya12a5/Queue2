@@ -1,239 +1,229 @@
 ﻿#pragma once
 #include<iostream>
+#include <algorithm>
 
 template <class T>
-class TQueue
+struct TNode
 {
-private:
-	T* pMem;
-	int size;
-	int finish, start;
-	int count;
-
-public:
-	TQueue();
-	TQueue(int _size);                       
-	~TQueue();                              
-	TQueue(const TQueue& object);            
-	bool empty();                            
-	bool full();                             
-
-	void Push(const T& element);             
-	T Pop();                                 
-	T front();                               
-	T back();                                
-
-	void operator = (const TQueue& object);  
-	bool operator ==(const TQueue& object);  
-	bool operator !=(const TQueue& object);  
-	int GetHeadIndex();                      
-	int GetCurrentSize();                    
-	int GetMaxSize();                        
-	int NumberOfElements();                  
-
-	void output();                           
+	T value;
+	TNode<T>* pNext;
+	TNode() { pNext = nullptr; }
 };
 
 template <class T>
-TQueue<T>::TQueue():size(10)
+class TLQueue
 {
+private:
+	TNode<T>* pFirst, * pLast;
 
-}
-template<class T>
- TQueue<T>::TQueue(int _size)
-{
-	if (_size < 1)
-	{
-		throw std::exception();
-	}
-	size = _size;
-	pMem = new T[size];
-	start = 0;
-	finish = -1;
-	count = 0;
-}
+public:
+	TLQueue() { pFirst = nullptr; pLast = nullptr; };         
+	~TLQueue() { ClearQueue(); };
+	TLQueue(const TLQueue<T>& q);                  
 
-template<class T>
- TQueue<T>::~TQueue()
-{
-	delete[] pMem;
-	start = 0;
-	finish = -1;
-	count = 0;
-}
+	TLQueue<T>& operator=(const TLQueue<T>& q);   
+	bool operator==(const TLQueue<T>& q);          
+	bool operator != (const TLQueue<T>& q);         
+
+	bool empty();                                             
+	void Push(const T& el);                              
+	T Pop();                                                 
+	T Front();                                                
+	T Back();                                                
+	int size_queue();                                     
+	void ClearQueue();                                        
+	void output();                                            
+};
 
 template<class T>
- TQueue<T>::TQueue(const TQueue& object)
+inline TLQueue<T>::TLQueue(const TLQueue<T>& obj)
 {
-	delete[] pMem;
-	size = object.size;
-	pMem = new T[size];
-	std::copy(object.pMem, object.pMem + size, pMem);
-	start = object.start;
-	finish = object.finish;
-	count = object.count;
-}
-
-template<class T>
-bool TQueue<T>::empty()
-{
-	if (count == 0)
+	TNode<T>* tmp = obj.pFirst, * node;
+	pFirst = pLast = nullptr;
+	while (tmp != nullptr)
 	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-template<class T>
- bool TQueue<T>::full()
-{
-	if (count == size)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-template<class T>
- void TQueue<T>::Push(const T& element)
-{
-	if (full())
-	{
-		throw std::exception();
-	}
-	finish++;
-	finish = finish % size;
-	pMem[finish] = element;
-	count++;
-}
-
-template<class T>
- T TQueue<T>::Pop()
-{
-	if (empty())
-	{
-		throw std::exception();
-	}
-	T element = pMem[start];
-	start++;
-	start = start % size;
-	count--;
-	return element;
-}
-
-template<class T>
- T TQueue<T>::front()
-{
-	if (this->empty())
-	{
-		throw std::exception();
-	}
-	return pMem[start];
-}
-
-template<class T>
- T TQueue<T>::back()
-{
-	if (this->empty())
-	{
-		throw std::exception();
-	}
-	return pMem[finish];
-}
-
-template<class T>
-void TQueue<T>::operator=(const TQueue& object)
-{
-	start = object.start;
-	finish = object.finish;
-	count = object.count;
-	if (count == object.count)
-	{
-		std::copy(object.pMem, object.pMem + size, pMem);
-	}
-	else
-	{
-		delete[] pMem;
-		size = object.size;
-		pMem = new T[size];
-		std::copy(object.pMem, object.pMem + size, pMem);
-	}
-}
-
-template<class T>
-bool TQueue<T>::operator==(const TQueue& object)
-{
-	if (count != object.count)
-	{
-		return false;
-	}
-	else
-	{
-		TQueue this_tmp = *this;
-		TQueue obj_tmp = object;
-		while (!this_tmp.empty())
+		node = new TNode<T>;
+		node->value = tmp->value;
+		if (pFirst == nullptr)
 		{
-			if (this_tmp.front() != obj_tmp.front())
+			pFirst = node;
+			pLast = node;
+		}
+		else
+		{
+			pLast->pNext = node;
+			pLast = node;
+		}
+		tmp = tmp->pNext;
+	}
+}
+
+template<class T>
+inline TLQueue<T>& TLQueue<T>::operator=(const TLQueue<T>& obj)
+{
+	if (obj.pFirst == nullptr)
+	{
+		ClearQueue();
+	}
+	else
+	{
+		
+		TNode<T>* tmp = obj.pFirst, * node;
+		while (tmp != nullptr)
+		{
+			node = new TNode<T>;
+			node->value = tmp->value;
+			if (pFirst == nullptr)
 			{
-				return false;
+				pFirst = node;
+				pLast = node;
 			}
-			this_tmp.Pop();
-			obj_tmp.Pop();
+			else
+			{
+				pLast->pNext = node;
+				pLast = node;
+			}
+			tmp = tmp->pNext;
+		}
+	}
+	return *this;
+}
+
+template<class T>
+inline bool TLQueue<T>::operator==(const TLQueue<T>& obj)
+{
+	TLQueue<T> current_queue(*this);
+	TLQueue<T> another_queue(obj);
+
+	if (size_queue() != another_queue.size_queue())
+	{
+		return false;
+	}
+	if (pFirst == nullptr && obj.pFirst == nullptr)
+	{
+		return true;
+	}
+	while (!current_queue.empty())
+	{
+		if (current_queue.Pop() != another_queue.Pop())
+		{
+			return false;
 		}
 	}
 	return true;
 }
 
 template<class T>
- bool TQueue<T>::operator!=(const TQueue& object)
+inline bool TLQueue<T>::operator!=(const TLQueue<T>& obj)
 {
-	return !(*this == object);
+	return !(*this == obj);
 }
 
 template<class T>
- int TQueue<T>::GetHeadIndex()
+inline bool TLQueue<T>::empty()
 {
-	return start;
-}
-
-template<class T>
- int TQueue<T>::GetCurrentSize()
-{
-	return (finish - start) + 1;
-}
-
-template<class T>
- int TQueue<T>::GetMaxSize()
-{
-	return size;
-}
-
-template<class T>
- int TQueue<T>::NumberOfElements()
-{
-	return count;;
-}
-
-template<class T>
- void TQueue<T>::output()
-{
-	if (this->empty())
+	if (pFirst == nullptr)
 	{
-		throw std::exception();
+		return true;
 	}
-	TQueue<T> this_tmp(*this);
-	std::cout << "(";
-	while (!(this_tmp.empty()))
+	else
 	{
-		std::cout <<" "<< this_tmp.Pop();
-		
+		return false;
 	}
-	std::cout << " )";
-	std::cout << std::endl;
+}
+
+template<class T>
+inline T TLQueue<T>::Pop()
+{
+	if (empty())
+	{
+		throw "Queue is empty";
+	}
+
+	TNode<T>* tmp = pFirst;
+	T result = pFirst->value;
+	pFirst = pFirst->pNext;
+	delete tmp;
+	return result;
+}
+
+template<class T>
+inline void TLQueue<T>::Push(const T& el)
+{
+	TNode<T>* tmp = new TNode<T>;
+	tmp->value = el;
+	tmp->pNext = nullptr;
+	if (empty())
+	{
+		pFirst = tmp;
+		pLast = tmp;
+	}
+	else
+	{
+		pLast->pNext = tmp;
+		pLast = tmp;
+	}
+}
+
+template<class T>
+inline T TLQueue<T>::Front()
+{
+	if (empty())
+	{
+		throw "Queue is empty";
+	}
+	return pFirst->value;
+}
+
+template<class T>
+inline T TLQueue<T>::Back()
+{
+	if (empty())
+	{
+		throw "Queue is empty";
+	}
+	return pLast->value;
+}
+
+template<class T>
+inline int TLQueue<T>::size_queue()
+{
+	TNode<T>* tmp = pFirst;
+	int i = 0;
+	while (tmp != nullptr)
+	{
+		i++;
+		tmp = tmp->pNext;
+	}
+	return i;
+}
+
+template<class T>
+inline void TLQueue<T>::ClearQueue()
+{
+	while (!empty())
+	{
+		Pop();
+	}
+	pFirst = nullptr;
+	pLast = nullptr;
+}
+
+template<class T>
+inline void TLQueue<T>::output()
+{
+	if (empty())
+	{
+		std::cout << "( )";
+	}
+	else
+	{
+		TLQueue<T> current(*this);
+		std::cout << "( ";
+		while (!current.empty())
+		{
+			std::cout << current.Pop() << " ";
+		}
+		std::cout << ")" << std::endl;
+	}
 }

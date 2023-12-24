@@ -1,207 +1,158 @@
+#define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING
+
 #include "../Queue/TQueue.h"
 #include "gtest.h"
-
-TEST(TQueue, can_create_queue_with_positive_size)
+TEST(TLQueue, can_create_queue_with_positive_size)
 {
-    ASSERT_NO_THROW(TQueue<int> q(5));
+    
+    ASSERT_NO_THROW(TLQueue<int> q);
 }
-
-TEST(TQueue, throws_when_create_queue_with_negative_size)
+TEST(TLQueue, new_queue_is_empty)
 {
-	ASSERT_ANY_THROW(TQueue<int> q(-5));
+   
+    TLQueue<int> q;
+    EXPECT_EQ(1, q.empty());
 }
-
-TEST(TQueue, can_create_copi_queue)
+TEST(TLQueue, can_copy)
 {
-	TQueue<int> q(5);
-	
-	ASSERT_NO_THROW(TQueue<int> q1(q));
+   
+    TLQueue<int> q;
+    q.Push(1);
+    q.Push(2);
+    q.Push(3);
+    ASSERT_NO_THROW(TLQueue<int> q1(q));
+    
 }
-
-TEST(TQueue, copied_queue_is_equal_to_source_one)
+TEST(TLQueue, copied_queue_is_equal_to_source_one)
 {
-	TQueue<int> q(5);
-	int i = 1;
-	while (!(q.full()))
-	{
-		q.Push(i);
-		i++;
-	}
-	TQueue<int> q1(q);
-	while (!(q.empty()) && !(q1.empty()))
-	{
-		EXPECT_EQ(q.Pop(), q1.Pop());
-	}
+    
+    TLQueue<int> q;
+    q.Push(1);
+    q.Push(2);
+    q.Push(3);
+    ASSERT_NO_THROW(TLQueue<int> q1(q));
+    TLQueue<int> q1(q);
+    EXPECT_EQ(1, q == q1);
 }
-
-TEST(TQueue, copied_queue_has_its_own_memory)
+TEST(TLQueue, right_true_equal_queues)
 {
-	TQueue<int> q(5);
-	int i = 1;
-	while (!(q.full()))
-	{
-		q.Push(i);
-		i++;
-	}
-	TQueue<int> q1(q);
-	EXPECT_EQ(0, &q == &q1);
+    
+    TLQueue<int> q;
+    q.Push(1);
+    q.Push(2);
+    q.Push(3);
+    TLQueue<int> q1;
+    q1.Push(1);
+    q1.Push(2);
+    q1.Push(3);
+    EXPECT_EQ(1, q == q1);
 }
-
-TEST(TQueue, can_correct_two_equal_queues)
+TEST(TLQueue, right_false_equal_queues)
 {
-	TQueue<int> q(4);
-	int i = 3;
-	while (!(q.full()))
-	{
-		q.Push(i);
-	}
-	TQueue<int> q1(4);
-	int k = 3;
-	while (!(q1.full()))
-	{
-		q1.Push(k);
-	}
-	EXPECT_EQ(true, q==q1);
+   
+    TLQueue<int> q;
+    q.Push(1);
+    q.Push(2);
+    TLQueue<int> q1;
+    q1.Push(1);
+    q1.Push(1);
+    q1.Push(1);
+    EXPECT_EQ(1, q != q1);
 }
-
-TEST(TQueue, can_correct_two_not_equal_queues)
+TEST(TLQueue, can_push)
 {
-	TQueue<int> q(5);
-	int i = 1;
-	while (!(q.full()))
-	{
-		q.Push(i);
-	}
-	TQueue<int> q1(5);
-	int k = 1;
-	while (!(q1.full()))
-	{
-		q1.Push(k+1);
-	}
-	EXPECT_EQ(true, q != q1);
+    
+    TLQueue<int> q;
+    int a1 = 1;
+    int a2 = 2;
+  
+   
+    q.Push(a1);
+    q.Push(a2);
+   
+    EXPECT_EQ(a1, q.Pop());
+    EXPECT_EQ(a2, q.Pop());
+   
 }
-
-
-
-
-TEST(TQueue, new_queue_is_empty)
+TEST(TLQueue, can_pop)
 {
-	TQueue<int> q(5);
-	EXPECT_EQ(true, q.empty());
+    
+    TLQueue<int> q;
+    int a1 = 1;
+    int a2 = 2;
+   
+    q.Push(a1);
+    q.Push(a2);
+  
+    int b1, b2;
+    ASSERT_NO_THROW(b1 = q.Pop());
+    ASSERT_NO_THROW(b2 = q.Pop());
+   
+    EXPECT_EQ(a1, b1);
+    EXPECT_EQ(a2, b2);
+   
 }
-
-TEST(TQueue, no_empty_queue_is_not_empty)
+TEST(TLQueue, throws_when_use_pop_on_empty_queue)
 {
-	TQueue<int> q(5);
-	q.Push(1);
-	q.Push(2);
-	EXPECT_EQ(false, q.empty());
+    
+    TLQueue<int> q;
+    ASSERT_ANY_THROW(q.Pop());
 }
-
-TEST(TQueue, full_queue_is_full)
+TEST(TLQueue, can_use_front)
 {
-	TQueue<int> q(5);
-	int i = 1;
-	while (!(q.full()))
-	{
-		q.Push(i);
-	}
-	EXPECT_EQ(true, q.full());
+    TLQueue<int> q;
+    q.Push(1);
+    q.Push(2);
+    int a1;
+    ASSERT_NO_THROW(a1 = q.Front());
+   
+    EXPECT_EQ(a1, 1);
 }
-
-TEST(TQueue, not_full_queue_is_not_full)
+TEST(TLQueue, can_use_back)
 {
-	TQueue<int> q(5);
-	q.Push(1);
-	q.Push(2);
-	EXPECT_EQ(false, q.full());
+    TLQueue<int> q;
+    q.Push(1);
+    q.Push(2);
+    int  a2;
+    
+    ASSERT_NO_THROW(a2 = q.Back());
+    EXPECT_EQ(2, a2);
 }
-
-TEST(TQueue, throws_when_output_empty_queue)
+TEST(TLQueue, throws_when_use_front_on_empty_queue)
 {
-	TQueue<int> q(5);
-	ASSERT_ANY_THROW(q.output());
+    
+    TLQueue<int> q;
+    ASSERT_ANY_THROW(q.Front());
+    
 }
-
-TEST(TQueue, can_push)
+TEST(TLQueue, throws_when_use_back_on_empty_queue)
 {
-	TQueue<int> q(5);
-	ASSERT_NO_THROW(q.Push(1));
+    
+    TLQueue<int> q;
+   
+    ASSERT_ANY_THROW(q.Back());
 }
-
-TEST(TQueue, can_pop)
+TEST(TLQueue, Empty_on_empty_queue)
 {
-	TQueue<int> q(5);
-	q.Push(1);
-	ASSERT_NO_THROW(q.Pop());
+   
+    TLQueue<int> q;
+    bool a1 = q.empty();
+    EXPECT_EQ(1, a1);
 }
-
-TEST(TQueue, cant_push_to_full_queue)
+TEST(TLQueue, false_Empty_on_not_empty_queue)
 {
-	TQueue<int> q(5);
-	int i = 1;
-	while (!(q.full()))
-	{
-		q.Push(i);
-	}
-	ASSERT_ANY_THROW(q.Push(1));
+    
+    TLQueue<int> q;
+    q.Push(1);
+    q.Push(1);
+    bool a1 = q.empty();
+    EXPECT_EQ(0, a1);
 }
-
-TEST(TQueue, cant_pop_from_empty_queue)
+TEST(TLQueue, can_get_size_queue)
 {
-	TQueue<int> q(5);
-	ASSERT_ANY_THROW(q.Pop());
-}
-
-TEST(TQueue, cant_get_front_from_empty_stack)
-{
-	TQueue<int> q(5);
-	ASSERT_ANY_THROW(q.front());
-}
-
-TEST(TQueue, can_get_right_front)
-{
-	TQueue<int> q(5);
-	q.Push(1);
-	q.Push(2);
-	EXPECT_EQ(1, q.front());
-}
-
-TEST(TQueue, cant_get_back_from_empty_stack)
-{
-	TQueue<int> q(5);
-	ASSERT_ANY_THROW(q.back());
-}
-
-TEST(TQueue, can_get_right_back)
-{
-	TQueue<int> q(5);
-	q.Push(1);
-	q.Push(2);
-	EXPECT_EQ(2, q.back());
-}
-
-TEST(TQueue, can_get_right_head_index)
-{
-	TQueue<int> q(5);
-	q.Push(1);
-	q.Push(2);
-	int tmp = q.Pop();
-	EXPECT_EQ(1, q.GetHeadIndex());
-}
-
-TEST(TQueue, can_get_right_current_size)
-{
-	TQueue<int> q(5);
-	q.Push(0);
-	q.Push(1);
-	q.Push(2);
-	int tmp = q.Pop();
-	EXPECT_EQ(2, q.GetCurrentSize());
-}
-
-TEST(TQueue, can_get_right_max_size)
-{
-	TQueue<int> q(5);
-	EXPECT_EQ(5, q.GetMaxSize());
+    
+    TLQueue<int> q;
+    q.Push(1);
+    q.Push(1);
+    EXPECT_EQ(2, q.size_queue());
 }
